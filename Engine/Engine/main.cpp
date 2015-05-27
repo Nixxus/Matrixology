@@ -1,18 +1,34 @@
 //Test Main file
 #include <conio.h>
 #include "D3D.h"
+#include "Window.h"
 using namespace std;
 
-#define KEY_UP 22
-
-int main()
+int WINAPI WinMain(HINSTANCE hInstance,
+                   HINSTANCE hPrevInstance,
+                   LPSTR lpCmdLine,
+                   int nCmdShow)
 {
-	HWND hWnd = NULL;
+	//Create Window
+	HWND hWnd = NewWindow(hInstance, hPrevInstance, lpCmdLine, nCmdShow);
 
+	//Start Direct3D
 	InitD3D(hWnd);
-	while (_getch() != KEY_UP)
+
+	MSG msg; // windows message storage
+
+	//Wait for the next message then store in msg
+	while (GetMessage(&msg, NULL, 0, 0))
 	{
+		//Translate message to correct format
+		TranslateMessage(&msg);
+
+		//Send Message to message Handler
+		DispatchMessage(&msg);
+
+		//Render a new D3D frame
 		RenderFrame();
 	}
-	return 0;
+
+	return msg.wParam;
 }
