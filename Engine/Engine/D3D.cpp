@@ -16,7 +16,7 @@ void InitD3D(HWND hWnd)
 	ZeroMemory(&scd, sizeof(DXGI_SWAP_CHAIN_DESC));
 
 	// Fill the Swap Chain description Struct
-	scd.BufferCount = 1;									//single ebackbuffer
+	scd.BufferCount = 1;									//single backbuffer
 	scd.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;		//use 32-bit colour
 	scd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;		//How the swap chain is to be used
 	scd.OutputWindow = hWnd;								//The Window to be used
