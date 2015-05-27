@@ -18,16 +18,28 @@ int WINAPI WinMain(HINSTANCE hInstance,
 	MSG msg; // windows message storage
 
 	//Wait for the next message then store in msg
-	while (GetMessage(&msg, NULL, 0, 0))
+	while (TRUE)
 	{
-		//Translate message to correct format
-		TranslateMessage(&msg);
+		if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
+		{
+			
+			//Translate message to correct format
+			TranslateMessage(&msg);
 
-		//Send Message to message Handler
-		DispatchMessage(&msg);
+			//Send Message to message Handler
+			DispatchMessage(&msg);
 
-		//Render a new D3D frame
-		RenderFrame();
+			if (msg.message ==WM_QUIT)
+			{
+				CleanD3D();
+				return 0;
+			}
+			else
+			{
+				//Render a new D3D frame
+				RenderFrame();
+			}
+		}
 	}
 
 	return msg.wParam;

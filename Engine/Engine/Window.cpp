@@ -22,15 +22,19 @@ HWND NewWindow (HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, i
 	//Register Window Class
 	RegisterClassEx(&wc);
 
+	//Set Client size and adjust window Size
+	RECT wr = {0, 0, 800, 800}; // Set Size
+	AdjustWindowRect (&wr, WS_OVERLAPPEDWINDOW, FALSE); // adjust size
+
 	//createWindow and use result as handle
 	hWnd = CreateWindowEx(NULL,
 						  "WindowClass1",		//Name of Window Class
 						  "Engine Window",		//Window Title
 						  WS_OVERLAPPEDWINDOW,	//Window Style
-						  300,					//X position of window
-						  300,					//Y position of window
-						  800,					//Width of window
-						  800,					//Height of Window
+						  100,					//X position of window
+						  100,					//Y position of window
+						  wr.right - wr.left,	//Width of window
+						  wr.bottom - wr.top,	//Height of Window
 						  NULL,					//Parent Window
 						  NULL,					//Window Menus
 						  hInstance,			//Application handle
